@@ -1,6 +1,7 @@
-package com.apad99.JobApplicationBoardProject;
+package com.apad99.JobApplicationBoardProject.model;
 
-import com.apad99.JobApplicationBoardProject.model.JobPost;
+import com.apad99.JobApplicationBoardProject.service.JobService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class JobController {
+
+    @Autowired
+    private JobService service;
 
     @GetMapping({"/", "home"})
     public String home() {
@@ -21,8 +25,9 @@ public class JobController {
 
     @PostMapping("/handleForm")
     public String handleForm(JobPost jobPost, Model model) {
+        service.addJob(jobPost);
         model.addAttribute("jobPost", jobPost);
-        return "success"; // success.html can now use ${jobPost...}
+        return "success";
     }
 
 //    @RequestMapping("success")
