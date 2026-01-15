@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class JobController {
@@ -20,6 +19,7 @@ public class JobController {
         return "addjob";
     }
 
+    @PostMapping("/handleForm")
     public String handleForm(JobPost jobPost, Model model) {
         model.addAttribute("jobPost", jobPost);
         return "success"; // success.html can now use ${jobPost...}
